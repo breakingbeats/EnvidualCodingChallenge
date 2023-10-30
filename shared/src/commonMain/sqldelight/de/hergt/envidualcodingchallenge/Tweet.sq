@@ -1,0 +1,36 @@
+CREATE TABLE Tweet (
+    mId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    mMessage TEXT NOT NULL,
+    mTimestamp INTEGER NOT NULL
+);
+
+getAllTweets:
+SELECT *
+FROM Tweet;
+
+getAllTweetsByKeyword:
+SELECT *
+FROM Tweet
+WHERE INSTR(mMessage, :keyword) > 0;
+
+getTweetById:
+SELECT *
+FROM Tweet
+WHERE mId = ?;
+
+setTweetByValues:
+INSERT OR IGNORE INTO Tweet(mId, mMessage, mTimestamp)
+VALUES (?,?,?);
+
+updateTweetById:
+UPDATE Tweet
+SET mMessage = :message,
+    mTimestamp = :timestamp
+WHERE mId = :id;
+
+deleteTweetById:
+DELETE FROM Tweet
+WHERE mId = :id;
+
+deleteAllTweets:
+DELETE FROM Tweet;
